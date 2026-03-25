@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuraBet — Spin Your Luck. Elevate Your Game.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── ACCENT: Electric Violet ── */
+body {
+  --accent:      #7C5CFC;
+  --accent-dim:  rgba(124,92,252,0.15);
+  --accent-glow: rgba(124,92,252,0.25);
+  --btn-fg:      #ffffff;
+}
+
+body {
+  --bg:      #0A0A0A;
+  --bg2:     #111111;
+  --bg3:     #161616;
+  --white:   #FFFFFF;
+  --muted:   rgba(255,255,255,0.48);
+  --muted2:  rgba(255,255,255,0.28);
+  --bdr:     rgba(255,255,255,0.06);
+  --bdr2:    rgba(255,255,255,0.1);
+
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px; height: 62px;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--bdr);
+}
+.logo {
+  font-size: 17px; font-weight: 800; letter-spacing: -0.02em;
+  color: var(--white); text-decoration: none;
+}
+.logo em { font-style: normal; color: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--muted);
+  text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-dl {
+  background: var(--accent); color: var(--btn-fg);
+  font-weight: 700; font-size: 14px; letter-spacing: -0.01em;
+  padding: 9px 20px; border-radius: 100px;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: opacity .2s, transform .15s;
+}
+.nav-dl:hover { opacity: .85; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 160px 24px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-glow {
+  position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--bdr2);
+  border-radius: 100px; padding: 6px 14px;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+  margin-bottom: 28px;
+}
+.hero-pill span { color: var(--white); font-weight: 600; }
+
+.hero h1 {
+  font-size: clamp(46px, 8vw, 96px);
+  font-weight: 900; line-height: 1.0;
+  letter-spacing: -0.04em;
+  margin-bottom: 22px; max-width: 920px;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+
+.hero-sub {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--muted); line-height: 1.6;
+  max-width: 500px; margin: 0 auto 40px;
+  font-weight: 400; letter-spacing: -0.005em;
+}
+
+.app-btn {
+  display: inline-flex; align-items: center; gap: 11px;
+  background: var(--white); color: #0A0A0A;
+  padding: 14px 24px; border-radius: 14px; text-decoration: none;
+  transition: opacity .2s, transform .15s;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.app-btn:hover { opacity: .9; transform: translateY(-2px); }
+.app-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+.app-btn-text { display: flex; flex-direction: column; text-align: left; }
+.app-btn-small { font-size: 10px; font-weight: 500; opacity: .6; letter-spacing: 0.02em; }
+.app-btn-big   { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+
+/* ── DIVIDER ── */
+hr {
+  border: none; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bdr2), transparent);
+  margin: 0 52px;
+}
+
+/* ── FEATURE ROWS ── */
+.feat {
+  display: flex; align-items: center;
+  gap: 80px; padding: 96px 52px;
+}
+.feat.rev { flex-direction: row-reverse; }
+
+.phone-wrap { flex: 0 0 auto; width: 300px; }
+.phone-shell {
+  width: 100%;
+  background: #1A1A1A;
+  border-radius: 42px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow:
+    0 50px 100px rgba(0,0,0,0.65),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden; position: relative;
+}
+.phone-shell::before {
+  content: ''; position: absolute;
+  top: 12px; left: 50%; transform: translateX(-50%);
+  width: 96px; height: 26px;
+  background: #0A0A0A; border-radius: 20px; z-index: 10;
+}
+.phone-img {
+  width: 100%; display: block;
+  aspect-ratio: 390/844; object-fit: cover; object-position: top;
+}
+.phone-ph {
+  width: 100%; aspect-ratio: 390/844;
+  background: #141414;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; padding: 40px; text-align: center;
+}
+.ph-icon  { font-size: 40px; }
+.ph-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); opacity: .8;
+}
+.ph-hint { font-size: 12px; color: var(--muted2); line-height: 1.5; margin-top: 2px; }
+
+.feat-copy { flex: 1; }
+.eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 14px;
+}
+.feat-copy h2 {
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 800; line-height: 1.15;
+  letter-spacing: -0.03em; margin-bottom: 16px;
+}
+.feat-copy p {
+  font-size: 17px; color: var(--muted); line-height: 1.75;
+  font-weight: 400; max-width: 420px; letter-spacing: -0.005em;
+}
+
+/* ── HOW IT WORKS ── */
+.hiw { padding: 100px 52px; text-align: center; }
+.hiw h2 {
+  font-size: clamp(30px, 4.5vw, 56px);
+  font-weight: 800; letter-spacing: -0.03em;
+  margin-bottom: 72px;
+}
+.hiw-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; max-width: 820px; margin: 0 auto;
+  position: relative;
+}
+.hiw-grid::before {
+  content: ''; position: absolute;
+  top: 28px; left: calc(16.67% + 18px); right: calc(16.67% + 18px);
+  height: 1px; background: var(--bdr2);
+}
+.hiw-step { padding: 0 18px; }
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--accent); color: var(--btn-fg);
+  font-weight: 800; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; position: relative; z-index: 1;
+  box-shadow: 0 0 0 8px var(--accent-dim);
+}
+.hiw-step h3 {
+  font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.hiw-step p { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+/* ── TIERS ── */
+.tiers { padding: 100px 52px; }
+.tiers-hd { text-align: center; margin-bottom: 56px; }
+.tiers-hd h2 {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px;
+}
+.tiers-hd p { font-size: 17px; color: var(--muted); letter-spacing: -0.005em; }
+.tiers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+
+.tier {
+  border-radius: 20px; padding: 36px 28px;
+  background: var(--bg2); border: 1px solid var(--bdr);
+  transition: transform .3s, border-color .3s;
+}
+.tier:hover { transform: translateY(-4px); }
+.tier.highlight {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+.tier-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 100px; margin-bottom: 20px;
+  background: rgba(255,255,255,0.06); color: var(--muted);
+}
+.tier.highlight .tier-tag {
+  background: var(--accent); color: var(--btn-fg);
+}
+.tier h3 {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+.tier.highlight h3 { color: var(--accent); }
+.tier p {
+  font-size: 14px; color: var(--muted); line-height: 1.7;
+  margin-bottom: 22px; font-weight: 400;
+}
+.tier-ex {
+  font-size: 13px; font-style: italic;
+  color: rgba(255,255,255,0.45); line-height: 1.6;
+  border-left: 2px solid var(--bdr2);
+  padding: 10px 14px; border-radius: 0 8px 8px 0;
+  background: rgba(255,255,255,0.02);
+}
+.tier.highlight .tier-ex { border-color: var(--accent); }
+
+/* ── REVIEWS ── */
+.reviews { padding: 100px 52px; }
+.reviews-hd { text-align: center; margin-bottom: 56px; }
+.reviews-hd h2 {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 800; letter-spacing: -0.03em;
+}
+.rev-grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 14px; }
+.rev-grid2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; max-width: 700px; margin: 0 auto; }
+.rev-card {
+  background: var(--bg2); border: 1px solid var(--bdr);
+  border-radius: 16px; padding: 26px;
+  transition: border-color .25s;
+}
+.rev-card:hover { border-color: var(--bdr2); }
+.rev-stars { color: #F5C518; font-size: 12px; letter-spacing: 2px; margin-bottom: 13px; }
+.rev-text  { font-size: 14px; color: rgba(255,255,255,.58); line-height: 1.75; margin-bottom: 20px; letter-spacing: -0.005em; }
+.rev-auth  { display: flex; align-items: center; gap: 10px; }
+.av {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: #fff;
+}
+.av1{background:linear-gradient(135deg,#5B3FA0,#2D1455);}
+.av2{background:linear-gradient(135deg,#3A5FA0,#1A2F60);}
+.av3{background:linear-gradient(135deg,#8A6030,#50381A);}
+.av4{background:linear-gradient(135deg,#3A9070,#1A5040);}
+.av5{background:linear-gradient(135deg,#903A5F,#501A30);}
+.rev-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+.rev-sub  { font-size: 12px; color: var(--muted2); }
+
+/* ── CTA ── */
+.cta-wrap { padding: 0 52px 80px; }
+.cta {
+  background: var(--bg2);
+  border: 1px solid var(--bdr2);
+  border-radius: 24px;
+  padding: 80px 40px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta::before {
+  content: ''; position: absolute;
+  top: -120px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cta h2 {
+  font-size: clamp(30px, 5vw, 60px);
+  font-weight: 900; letter-spacing: -0.04em;
+  margin-bottom: 14px; position: relative; z-index: 1; line-height: 1.05;
+}
+.cta p {
+  font-size: 18px; color: var(--muted); font-weight: 400;
+  margin-bottom: 8px; position: relative; z-index: 1;
+  letter-spacing: -0.005em;
+}
+.cta .zyn {
+  font-size: 13px; color: var(--muted2);
+  margin-bottom: 44px; position: relative; z-index: 1;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 11px;
+  background: var(--accent); color: var(--btn-fg);
+  padding: 15px 30px; border-radius: 14px; text-decoration: none;
+  position: relative; z-index: 1;
+  transition: opacity .2s, transform .15s;
+}
+.cta-btn:hover { opacity: .87; transform: translateY(-2px); }
+.cta-btn svg { width: 20px; height: 20px; }
+.cta-btn-text { display: flex; flex-direction: column; text-align: left; }
+.cta-btn-small { font-size: 10px; font-weight: 500; opacity: .7; letter-spacing: 0.02em; }
+.cta-btn-big   { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+
+/* ── FOOTER ── */
+footer { padding: 56px 52px 36px; border-top: 1px solid var(--bdr); }
+.ft-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; gap: 40px; }
+.ft-logo { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+.ft-logo em { font-style: normal; color: var(--accent); }
+.ft-tag  { font-size: 13px; color: var(--muted2); max-width: 200px; line-height: 1.6; }
+.ft-cols { display: flex; gap: 56px; }
+.ft-col h4 {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+}
+.ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.ft-col a  { font-size: 14px; color: var(--muted2); text-decoration: none; transition: color .2s; letter-spacing: -0.005em; }
+.ft-col a:hover { color: var(--white); }
+.ft-btm {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 28px; border-top: 1px solid var(--bdr);
+  font-size: 12px; color: rgba(255,255,255,.2); letter-spacing: -0.005em;
+}
+
+/* ── FADE ── */
+.fade { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.fade.in { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .theme-bar { font-size: 11px; gap: 8px; }
+  nav { padding: 0 24px; top: 0; }
+  .nav-links { display: none; }
+  .feat, .feat.rev { flex-direction: column; padding: 60px 24px; gap: 40px; }
+  .phone-wrap { width: 260px; }
+  .feat-copy p { max-width: 100%; }
+  hr { margin: 0 24px; }
+  .hiw,.tiers,.reviews { padding-left: 24px; padding-right: 24px; }
+  .hiw-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hiw-grid::before { display: none; }
+  .tiers-grid,.rev-grid3,.rev-grid2 { grid-template-columns: 1fr; }
+  .cta-wrap { padding: 0 24px 60px; }
+  .cta { padding: 56px 24px; }
+  footer { padding: 40px 24px 28px; }
+  .ft-top { flex-direction: column; }
+  .ft-cols { flex-wrap: wrap; gap: 28px; }
+  .ft-btm { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><img src="logo.png" alt="AuraBet" style="height:28px;width:auto;vertical-align:middle;margin-right:8px;">Aura<em>Bet</em></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#tiers">Tiers</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <a href="#" class="nav-dl">Download</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <h1 class="fade">
+    The app that turns<br>confidence into <em>a game.</em>
+  </h1>
+  <p class="hero-sub fade" style="transition-delay:.1s">
+    Spin the wheel. Place your bet. Win AI-powered lines across Common, Rare, and Legendary tiers. Your aura starts here.
+  </p>
+  <a href="#" class="app-btn fade" style="transition-delay:.2s">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    <div class="app-btn-text">
+      <span class="app-btn-small">Download on the</span>
+      <span class="app-btn-big">App Store</span>
+    </div>
+  </a>
+</section>
+
+<hr>
+
+<!-- FEATURE 1 — ROULETTE -->
+<div class="feat fade" id="features">
+  <div class="phone-wrap">
+    <div class="phone-shell">
+      <!-- TO USE YOUR SCREENSHOT: replace the div below with
+           <img class="phone-img" src="your-file.png" alt="Roulette"> -->
+      <div class="phone-ph">
+        <div class="ph-icon">🎰</div>
+        <div class="ph-label">Roulette Screen</div>
+        <div class="ph-hint">Swap with your App Store screenshot</div>
+      </div>
+    </div>
+  </div>
+  <div class="feat-copy">
+    <div class="eyebrow">The Main Game</div>
+    <h2>Spin the Wheel.<br>Win the Room.</h2>
+    <p>Wager virtual chips and let the roulette wheel decide your fate. Each spin generates a unique AI-crafted line — the bigger the bet, the rarer the tier. No two spins are ever the same.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- FEATURE 2 — BLACKJACK -->
+<div class="feat rev fade">
+  <div class="phone-wrap">
+    <div class="phone-shell">
+      <!-- <img class="phone-img" src="screenshot-blackjack.png" alt="Blackjack"> -->
+      <div class="phone-ph">
+        <div class="ph-icon">🃏</div>
+        <div class="ph-label">Blackjack Screen</div>
+        <div class="ph-hint">Swap with your App Store screenshot</div>
+      </div>
+    </div>
+  </div>
+  <div class="feat-copy">
+    <div class="eyebrow">High Stakes Mode</div>
+    <h2>Beat the Dealer.<br>Unlock the Legendary.</h2>
+    <p>Hit 21 and unlock a two-part Legendary line — the highest tier in the game. Blackjack mode is gated behind your Aura Score, reserved for those who've actually earned it.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- FEATURE 3 — LOUNGE -->
+<div class="feat fade">
+  <div class="phone-wrap">
+    <div class="phone-shell">
+      <!-- <img class="phone-img" src="screenshot-lounge.png" alt="The Lounge"> -->
+      <div class="phone-ph">
+        <div class="ph-icon">🛋️</div>
+        <div class="ph-label">The Lounge</div>
+        <div class="ph-hint">Swap with your App Store screenshot</div>
+      </div>
+    </div>
+  </div>
+  <div class="feat-copy">
+    <div class="eyebrow">High Roller Room</div>
+    <h2>Level Up.<br>Enter the Lounge.</h2>
+    <p>The Lounge is where serious players go. Track your Aura Score, hit new ranks, and unlock access to elite features as you level up. The more you play, the more doors open.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- FEATURE 4 — BEFORE YOU SEND -->
+<div class="feat rev fade">
+  <div class="phone-wrap">
+    <div class="phone-shell">
+      <!-- <img class="phone-img" src="screenshot-bys.png" alt="Before You Send"> -->
+      <div class="phone-ph">
+        <div class="ph-icon">💬</div>
+        <div class="ph-label">Before You Send</div>
+        <div class="ph-hint">Swap with your App Store screenshot</div>
+      </div>
+    </div>
+  </div>
+  <div class="feat-copy">
+    <div class="eyebrow">Message Optimizer</div>
+    <h2>Already Have a Draft?<br>Make It Better.</h2>
+    <p>Run your message through Before You Send. Pick your vibe — Flirty, Confident, Friendly, Empathetic — and get a sharper version back instantly. Stop sending messages you regret.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- HOW IT WORKS -->
+<section class="hiw fade" id="how">
+  <h2>How It Works</h2>
+  <div class="hiw-grid">
+    <div class="hiw-step">
+      <div class="step-num">1</div>
+      <h3>Place Your Bet</h3>
+      <p>Choose your chip denomination and wager on the wheel. Higher bets unlock rarer, more powerful lines.</p>
+    </div>
+    <div class="hiw-step">
+      <div class="step-num">2</div>
+      <h3>Spin the Wheel</h3>
+      <p>Watch the wheel decide your tier. AI generates a line crafted for your situation — unique every time.</p>
+    </div>
+    <div class="hiw-step">
+      <div class="step-num">3</div>
+      <h3>Win the Room</h3>
+      <p>Deploy your line, save your favorites, track your Aura Score, and level up your game every day.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- TIERS -->
+<section class="tiers fade" id="tiers">
+  <div class="tiers-hd">
+    <h2>Three Tiers. One Goal.</h2>
+    <p>Every spin lands in one of three tiers. The higher the bet, the rarer the line.</p>
+  </div>
+  <div class="tiers-grid">
+    <div class="tier">
+      <div class="tier-tag">Common</div>
+      <h3>The Opener</h3>
+      <p>Smooth, reliable lines for everyday moments. Low risk, solid reward. Perfect for building your streak and warming up.</p>
+      <div class="tier-ex">"You seem like the kind of person who has a really good Spotify playlist."</div>
+    </div>
+    <div class="tier highlight">
+      <div class="tier-tag">Rare</div>
+      <h3>The Play</h3>
+      <p>Sharp, confident lines that actually stand out. Requires a bigger bet. Reserved for those who play the game seriously.</p>
+      <div class="tier-ex">"I was going to leave, but then I saw you and decided my schedule could wait."</div>
+    </div>
+    <div class="tier">
+      <div class="tier-tag">Legendary</div>
+      <h3>The Power Move</h3>
+      <p>The rarest lines in the deck. Unforgettable. Only unlocked by those willing to go all in — no holding back.</p>
+      <div class="tier-ex">"You look like you'd be great at making excuses to stay longer."</div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- REVIEWS -->
+<section class="reviews fade" id="reviews">
+  <div class="reviews-hd"><h2>What Players Are Saying</h2></div>
+  <div class="rev-grid3">
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"This app genuinely changed how I approach talking to people. The gamification makes it fun instead of nerve-wracking. I literally can't stop playing."</p>
+      <div class="rev-auth"><div class="av av1">JM</div><div><div class="rev-name">Jake M.</div><div class="rev-sub">Verified User</div></div></div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"The Legendary lines hit different. I've never had so many conversations start from a single opener. Some of these are actually insane."</p>
+      <div class="rev-auth"><div class="av av2">CR</div><div><div class="rev-name">Carlos R.</div><div class="rev-sub">Verified User</div></div></div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"Before You Send saved me from sending the most embarrassing message of my life. The vibe selector is lowkey the best feature in any app I've used."</p>
+      <div class="rev-auth"><div class="av av3">TW</div><div><div class="rev-name">Tyler W.</div><div class="rev-sub">Verified User</div></div></div>
+    </div>
+  </div>
+  <div style="height:14px"></div>
+  <div class="rev-grid2">
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"Blackjack mode is so addictive. Hitting 21 and watching the Legendary line drop is one of the most satisfying moments in any app I've seen."</p>
+      <div class="rev-auth"><div class="av av4">MK</div><div><div class="rev-name">Marcus K.</div><div class="rev-sub">Verified User</div></div></div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"The Aura Score system keeps me coming back every single day. My streak is at 14 and I'm not letting it die. Best confidence app, period."</p>
+      <div class="rev-auth"><div class="av av5">DN</div><div><div class="rev-name">Devon N.</div><div class="rev-sub">Verified User</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-wrap fade">
+  <div class="cta">
+    <h2>Ready to Go All In?</h2>
+    <p>Download AuraBet free. Start spinning. Elevate your game.</p>
+    <p class="zyn">Cheaper than your weekly Zyns.</p>
+    <a href="#" class="cta-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="cta-btn-text">
+        <span class="cta-btn-small">Download on the</span>
+        <span class="cta-btn-big">App Store</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Aura<em>Bet</em></div>
+      <div class="ft-tag">Spin Your Luck. Elevate Your Game.</div>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#tiers">Tiers</a></li>
+          <li><a href="#">Download</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Creator Program</a></li>
+          <li><a href="mailto:hello@aurabetapp.com">Support</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="https://belltrixtech.github.io/aurabetapp.github.io/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="https://belltrixtech.github.io/aurabetapp.github.io/terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Socials</h4>
+        <ul>
+          <li><a href="https://www.tiktok.com/@aurabet" target="_blank">TikTok</a></li>
+          <li><a href="https://www.instagram.com/aurabet" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ft-btm">
+    <span>© 2026 AuraBet. All rights reserved.</span>
+    <span>Made for those who play to win.</span>
+  </div>
+</footer>
+
+<script>
+// Scroll fade-in
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
