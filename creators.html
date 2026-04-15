@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator Program — AuraBet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #0A0A0A;
+  --bg2:     #111111;
+  --accent:  #7C5CFC;
+  --accent-dim: rgba(124,92,252,0.15);
+  --accent-glow: rgba(124,92,252,0.25);
+  --white:   #FFFFFF;
+  --muted:   rgba(255,255,255,0.48);
+  --muted2:  rgba(255,255,255,0.28);
+  --bdr:     rgba(255,255,255,0.06);
+  --bdr2:    rgba(255,255,255,0.1);
+}
+body {
+  background: var(--bg); color: var(--white);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px; height: 62px;
+  background: rgba(10,10,10,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--bdr);
+}
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 17px; font-weight: 800; letter-spacing: -0.02em;
+  color: var(--white); text-decoration: none;
+}
+.logo img { height: 28px; width: auto; }
+.logo em { font-style: normal; color: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--muted);
+  text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-dl {
+  background: var(--accent); color: #fff;
+  font-weight: 700; font-size: 14px;
+  padding: 9px 20px; border-radius: 100px;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: opacity .2s, transform .15s;
+}
+.nav-dl:hover { opacity: .85; transform: translateY(-1px); }
+
+/* MAIN */
+.main {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 100px 24px;
+  position: relative; overflow: hidden;
+}
+.glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.coming-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-dim); border: 1px solid rgba(124,92,252,0.3);
+  border-radius: 100px; padding: 7px 16px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 32px; position: relative; z-index: 1;
+}
+.coming-tag::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(0.8); }
+}
+
+h1 {
+  font-size: clamp(42px, 7vw, 88px);
+  font-weight: 900; line-height: 1.0; letter-spacing: -0.04em;
+  margin-bottom: 24px; max-width: 800px;
+  position: relative; z-index: 1;
+}
+h1 em { font-style: normal; color: var(--accent); }
+
+.sub {
+  font-size: clamp(16px, 2vw, 19px); color: var(--muted);
+  line-height: 1.65; max-width: 500px;
+  margin: 0 auto 48px; font-weight: 400;
+  position: relative; z-index: 1;
+}
+
+.notify-form {
+  display: flex; gap: 10px; max-width: 420px;
+  margin: 0 auto; position: relative; z-index: 1;
+  flex-wrap: wrap; justify-content: center;
+}
+.notify-input {
+  flex: 1; min-width: 220px;
+  background: var(--bg2); border: 1px solid var(--bdr2);
+  border-radius: 12px; padding: 13px 18px;
+  color: var(--white); font-family: 'Inter', sans-serif;
+  font-size: 15px; outline: none;
+  transition: border-color .2s;
+}
+.notify-input::placeholder { color: var(--muted2); }
+.notify-input:focus { border-color: rgba(124,92,252,0.5); }
+.notify-btn {
+  background: var(--accent); color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; font-size: 15px;
+  padding: 13px 24px; border-radius: 12px;
+  border: none; cursor: pointer;
+  transition: opacity .2s, transform .15s; white-space: nowrap;
+}
+.notify-btn:hover { opacity: .87; transform: translateY(-1px); }
+
+.success-msg {
+  display: none; margin-top: 16px;
+  font-size: 14px; color: var(--accent); font-weight: 600;
+  position: relative; z-index: 1;
+}
+
+.perks {
+  display: flex; gap: 24px; margin-top: 72px;
+  flex-wrap: wrap; justify-content: center;
+  position: relative; z-index: 1;
+}
+.perk {
+  background: var(--bg2); border: 1px solid var(--bdr);
+  border-radius: 16px; padding: 24px 28px;
+  max-width: 200px; text-align: center;
+  transition: border-color .3s;
+}
+.perk:hover { border-color: rgba(124,92,252,0.25); }
+.perk-icon { font-size: 28px; margin-bottom: 12px; }
+.perk-title { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+.perk-desc  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* FOOTER */
+footer { padding: 48px 52px 32px; border-top: 1px solid var(--bdr); }
+.ft-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; gap: 40px; }
+.ft-logo { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+.ft-logo em { font-style: normal; color: var(--accent); }
+.ft-tag  { font-size: 13px; color: var(--muted2); max-width: 200px; line-height: 1.6; }
+.ft-cols { display: flex; gap: 56px; }
+.ft-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.ft-col a  { font-size: 14px; color: var(--muted2); text-decoration: none; transition: color .2s; }
+.ft-col a:hover { color: var(--white); }
+.ft-btm {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 24px; border-top: 1px solid var(--bdr);
+  font-size: 12px; color: rgba(255,255,255,.2);
+}
+
+@media(max-width:768px){
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .perks { gap: 12px; }
+  footer { padding: 40px 24px 28px; }
+  .ft-top { flex-direction: column; }
+  .ft-cols { flex-wrap: wrap; gap: 28px; }
+  .ft-btm { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="logo.png" alt="AuraBet">
+    Aura<em>Bet</em>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#features">Features</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="index.html#tiers">Tiers</a></li>
+    <li><a href="mailto:hello@aurabetapp.com">Support</a></li>
+  </ul>
+  <a href="#" class="nav-dl">Download</a>
+</nav>
+
+<main class="main">
+  <div class="glow"></div>
+
+  <div class="coming-tag">Coming Soon</div>
+
+  <h1>Get paid to<br><em>play the game.</em></h1>
+
+  <p class="sub">
+    The AuraBet Creator Program is almost here. Be the first to know when we launch — and get early access to creator perks, commission deals, and exclusive tools.
+  </p>
+
+  <div class="notify-form">
+    <input class="notify-input" type="email" placeholder="Enter your email" id="emailInput">
+    <button class="notify-btn" onclick="handleNotify()">Notify Me</button>
+  </div>
+  <div class="success-msg" id="successMsg">✓ You're on the list. We'll be in touch.</div>
+
+  <div class="perks">
+    <div class="perk">
+      <div class="perk-icon">💰</div>
+      <div class="perk-title">Commission</div>
+      <div class="perk-desc">Earn on every install you drive. Real money, real payouts.</div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">🎰</div>
+      <div class="perk-title">Early Access</div>
+      <div class="perk-desc">Get new features before anyone else. Be first to the table.</div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">✦</div>
+      <div class="perk-title">Creator Tools</div>
+      <div class="perk-desc">Exclusive content, assets, and support built for creators.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Aura<em>Bet</em></div>
+      <div class="ft-tag">Spin Your Luck. Elevate Your Game.</div>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#how">How It Works</a></li>
+          <li><a href="index.html#tiers">Tiers</a></li>
+          <li><a href="#">Download</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="creators.html">Creator Program</a></li>
+          <li><a href="mailto:hello@aurabetapp.com">Support</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="https://belltrixtech.github.io/aurabetapp.github.io/privacy.html">Privacy Policy</a></li>
+          <li><a href="https://belltrixtech.github.io/aurabetapp.github.io/terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Socials</h4>
+        <ul>
+          <li><a href="https://www.tiktok.com/@aurabet" target="_blank">TikTok</a></li>
+          <li><a href="https://www.instagram.com/aurabet" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ft-btm">
+    <span>© 2026 AuraBet. All rights reserved.</span>
+    <span>Made for those who play to win.</span>
+  </div>
+</footer>
+
+<script>
+function handleNotify() {
+  const email = document.getElementById('emailInput').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = 'rgba(255,80,80,0.5)';
+    return;
+  }
+  document.querySelector('.notify-form').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+}
+</script>
+</body>
+</html>
